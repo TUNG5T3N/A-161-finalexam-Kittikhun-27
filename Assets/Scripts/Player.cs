@@ -3,8 +3,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // public Fields
-    private float moveSpeed = 5f; 
-    private float jumpForce = 10f;
+    [SerializeField] private float moveSpeed = 5f;
+    private float jumpForce = 2f;
+
+    [SerializeField] private bool isInvulnerable = false;
 
     private Rigidbody2D rb;
 
@@ -24,5 +26,30 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
+    }
+
+    void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+        Debug.Log($"moveSpeed is set to {newSpeed}");
+    }
+
+    void SetInvulnerability(bool isEnable)
+    {
+        if (isEnable)
+        {
+            isInvulnerable = true;
+            Debug.Log($"isInvulnerable is set to true");
+        }
+        else
+        {
+            isInvulnerable = false;
+            Debug.Log($"isInvulnerable is set to false");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
 }
